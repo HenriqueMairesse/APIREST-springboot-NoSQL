@@ -1,0 +1,26 @@
+package com.midev.workshopmongo.services;
+
+import com.midev.workshopmongo.domain.Post;
+import com.midev.workshopmongo.domain.User;
+import com.midev.workshopmongo.dto.UserDTO;
+import com.midev.workshopmongo.repository.PostRepository;
+import com.midev.workshopmongo.repository.UserRepository;
+import com.midev.workshopmongo.services.exceptions.ObjectNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class PostService {
+
+    @Autowired
+    private PostRepository repo;
+
+    public Post findById(String id) {
+        Optional<Post> obj = repo.findById(id);
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
+    }
+
+}
